@@ -1,0 +1,57 @@
+main:
+        push    {r11, lr}
+        mov     r11, sp
+        sub     sp, sp, #8
+        mov     r0, #0
+        str     r0, [sp, #4]
+        str     r0, [sp]
+        b       .LBB1_1
+.LBB1_1:                                @ =>This Inner Loop Header: Depth=1
+        ldr     r0, [sp]
+        cmp     r0, #9
+        bgt     .LBB1_7
+        b       .LBB1_2
+.LBB1_2:                                @   in Loop: Header=BB1_1 Depth=1
+        ldrb    r0, [sp]
+        tst     r0, #1
+        beq     .LBB1_4
+        b       .LBB1_3
+.LBB1_3:                                @   in Loop: Header=BB1_1 Depth=1
+        ldr     r1, [sp]
+        ldr     r0, .LCPI1_1
+        bl      printf
+        b       .LBB1_5
+.LBB1_4:                                @   in Loop: Header=BB1_1 Depth=1
+        ldr     r1, [sp]
+        ldr     r0, .LCPI1_0
+        bl      printf
+        b       .LBB1_5
+.LBB1_5:                                @   in Loop: Header=BB1_1 Depth=1
+        b       .LBB1_6
+.LBB1_6:                                @   in Loop: Header=BB1_1 Depth=1
+        ldr     r0, [sp]
+        add     r0, r0, #1
+        str     r0, [sp]
+        b       .LBB1_1
+.LBB1_7:
+        ldr     r0, [sp, #4]
+        mov     sp, r11
+        pop     {r11, lr}
+        bx      lr
+.LCPI1_0:
+        .long   .L.str.1
+.LCPI1_1:
+        .long   .L.str
+_GLOBAL__sub_I_example.cpp:
+        push    {r11, lr}
+        mov     r11, sp
+        bl      __cxx_global_var_init
+        pop     {r11, lr}
+        bx      lr
+.L.str:
+        .asciz  "%d es impar\n"
+
+.L.str.1:
+        .asciz  "%d es par\n"
+        
+        Medina Ramos Juan José
