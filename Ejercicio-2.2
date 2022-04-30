@@ -1,0 +1,50 @@
+main:
+        push    {r11, lr}
+        mov     r11, sp
+        sub     sp, sp, #16
+        mov     r0, #0
+        str     r0, [r11, #-4]
+        ldr     r0, .LCPI1_0
+        ldr     r1, .LCPI1_1
+        bl      std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
+        ldr     r1, .LCPI1_2
+        add     r2, sp, #8
+        str     r0, [sp, #4]                    @ 4-byte Spill
+        mov     r0, r1
+        mov     r1, r2
+        bl      std::basic_istream<char, std::char_traits<char> >::operator>>(int&)
+        ldr     r1, [sp, #8]
+        cmp     r1, #18
+        blt     .LBB1_2
+        b       .LBB1_1
+.LBB1_1:
+        ldr     r0, .LCPI1_3
+        bl      printf
+        b       .LBB1_2
+.LBB1_2:
+        ldr     r0, [r11, #-4]
+        mov     sp, r11
+        pop     {r11, lr}
+        bx      lr
+.LCPI1_0:
+        .long   _ZSt4cout
+.LCPI1_1:
+        .long   .L.str
+.LCPI1_2:
+        .long   _ZSt3cin
+.LCPI1_3:
+        .long   .L.str.1
+_GLOBAL__sub_I_example.cpp:
+        push    {r11, lr}
+        mov     r11, sp
+        bl      __cxx_global_var_init
+        pop     {r11, lr}
+        bx      lr
+.L.str:
+        .asciz  "Ingrese la edad de Ignacio: "
+
+.L.str.1:
+        .asciz  "El sujeto es mayor de edad\n"
+        
+        
+        Medina Ramos Juan José
